@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改用户信息</title>
+</head>
+<body>
+<h1>用户修改页面</h1>
+<!--不可编辑 onfocus=this.blur()-->
+<form th:action="@{/user/updateById}" method="post">
+    用户id:  <input type="text" name="id" th:value="${user.id}"  onfocus="this.blur()"><br><br>
+    用户姓名：<input type="text" name="username" th:value="${user.username}"><br><br>
+    用户年龄：<input type="text" name="age" th:value="${user.age}"><br><br>
+    用户性别：<input type="text" name="sex" th:value="${user.sex}"><br><br>
+    用户身高：<input type="text" name="heart" th:value="${user.heart}"><br><br>
+    <input type="submit" name="username" value="点击修改"><br><br>
+</form>
+</body>
+</html>

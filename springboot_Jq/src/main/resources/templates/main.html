@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>展示用户的数据</title>
+</head>
+<body>
+<h1>用户数据展示</h1>
+<h3><a th:href="@{/users/selectAll}">展示用户信息</a></h3>
+<table border="1" width="50%" id="table_btn">
+    <th>用户编号</th>
+    <th>用户姓名</th>
+    <th>用户年龄</th>
+    <th>用户性别</th>
+    <th>用户身高</th>
+    <th>操作</th>
+    <tr th:each="lists:${list}">
+        <td th:text="${lists.id}"></td>
+        <td th:text="${lists.username}"></td>
+        <td th:text="${lists.age}"></td>
+        <td th:text="${lists.sex}"></td>
+        <td th:text="${lists.heart}"></td>
+        <td>
+            <a th:href="@{/user/insert}">添加</a>
+            <a th:href="@{/user/delete(id=${lists.id})}">删除</a>
+            <a th:href="@{/user/update(id=${lists.id})}">修改</a>
+        </td>
+    </tr>
+
+
+
+</table>
+</body>
+</html>

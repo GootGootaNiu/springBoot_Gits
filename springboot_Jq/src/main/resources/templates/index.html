@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户首页</title>
+</head>
+<body>
+<form th:action="@{/user/login}" method="get">
+    用户年龄:<input type="text" name="age" value=""><br><br>
+    用户姓名:<input type="text" name="username" value=""><br><br>
+    <input type="submit" value="点击登录"><br><br>
+
+</form>
+</body>
+</html>

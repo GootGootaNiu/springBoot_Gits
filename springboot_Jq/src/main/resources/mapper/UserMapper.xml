@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace属性：用来指定当前的映射文件和那个接口进行映射
+ 需要指定接口的文件路径 需要标注包的完整性-->
+<mapper namespace="com.king.springboot_jq.mapper.UserMapper">
+    <select id="selectAll" resultType="user">
+        select *
+        from user
+    </select>
+
+    <select id="selectByUsername" resultType="user">
+        select *
+        from user
+        where age = #{age}
+          and username = #{username}
+    </select>
+
+    <insert id="insertAll">
+        insert into user(username, age, sex, heart)
+        values (#{username}, #{age}, #{sex}, #{heart})
+    </insert>
+
+    <delete id="deleteById">
+        delete
+        from user
+        where id = #{id};
+    </delete>
+
+    <select id="selectById" resultType="user">
+        select *
+        from user
+        where id = #{id}
+    </select>
+
+    <update id="updateById">
+        update user
+        set username =#{username},
+            age=#{age},
+            sex=#{sex},
+            heart=#{heart}
+        where id = #{id}
+    </update>
+</mapper>
+
+
