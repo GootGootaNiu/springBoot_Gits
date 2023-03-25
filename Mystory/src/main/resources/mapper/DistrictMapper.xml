@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace属性：用来指定当前的映射文件和那个接口进行映射
+ 需要指定接口的文件路径 需要标注包的完整性-->
+<mapper namespace="com.king.mystory.mapper.DistrictMapper">
+
+    <!--省市联动查询数据 根据省份字符查询数据
+    parent 他是省份的序号 需要通过查询他 然后查询出对应的数据
+    code 他是按照市 升序处理的
+    -->
+    <select id="getByParent" resultType="district" parameterType="string">
+        select *
+        from t_dict_district
+        where parent = #{parent}
+        order by code asc;
+    </select>
+
+    <select id="findNameByCode" resultType="string">
+        select name
+        from t_dict_district
+        where code = #{code}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

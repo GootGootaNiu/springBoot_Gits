@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace属性：用来指定当前的映射文件和那个接口进行映射
+ 需要指定接口的文件路径 需要标注包的完整性-->
+<mapper namespace="com.king.mystory.mapper.UserMapper">
+    <!--
+        自定义映射规则 resultMap 标签来完成映射规则的属性
+        resultMap 中的id 属性标签给这个映射负责分配一个唯一的id 值 对应的就是 resultMa=id 属性的值
+        type属性  表示对应的是Java中的哪一个实体类
+    -->
+    <resultMap id="UserEntityMap" type="com.king.mystory.pojo.User">
+        <!--
+        将数据库中的字段 和 Java 类中的字段做对应
+        column 属性 表示表中的资源名称
+        property 属性 表示类中的属性名称
+        -->
+        <id column="uid" property="uid"></id>
+        <result column="is_delete" property="isDelete"></result>
+        <result column="created_User" property="createdUser"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="modified_user" property="modifiedUser"></result>
+        <result column="modified_time" property="modifiedTime"></result>
+    </resultMap>
+
+    <!--id属性表示映射接口中方法的名称 直接在标签的内容部来编写sql 语句
+    useGeneratedKeys属性： 表示开启某个字段的值自增(主键设置递增)
+    keyProperty 属性 标签将表中的呢个字段作为主键进行递增
+    -->
+    <insert id="insert" parameterType="user">
+        insert into t_user(username,
+                           password,
+                           salt,
+                           phone,
+                           email,
+                           gender,
+                           avatar,
+                           is_delete,
+                           created_user,
+                           created_time,
+                           modified_user,
+                           modified_time)
+        VALUES (#{username}, #{password}, #{salt}, #{phone}, #{email}, #{gender}, #{avatar}, #{isDelete},
+                #{createdUser}, #{createdTime}, #{modifiedUser}, #{modifiedTime})
+
+    </insert>
+
+    <!--select 语句在执行的时候 查询的结果是一个对象 多个对象
+    resultType 表示查询结果集类型 只需要指定对应映射类的类型
+    resultMap: 就是当数据库中的数据和 user 中的数据字段不一致的时候 使用把对用的字段给写出来
+
+    -->
+    <select id="findByUsername" resultMap="UserEntityMap">
+        select *
+        from t_user
+        where username = #{username}
+    </select>
+
+    <!--    <select id="selectAll" resultMap="UserEntityMap">-->
+    <!--        select *-->
+    <!--        from t_user-->
+    <!--        where username = #{username}-->
+    <!--          and password = #{password}-->
+    <!--    </select>-->
+
+    <!--根据用户uid 查询用户信息-->
+    <select id="selectUid" resultMap="UserEntityMap">
+        select *
+        from t_user
+        where uid = #{uid}
+    </select>
+
+    <!--根据uid  修改密码 和 修改人 和 修改时间-->
+    <update id="updatePasswordByUid">
+        update t_user
+        set password     =#{password},
+            modified_user=#{modifiedUser},
+            modified_time=#{modifiedTime}
+        where uid = #{uid}
+    </update>
+
+    <!--这个sql 语句是为了辅佐 用户信息的修改的-->
+    <select id="findByUid" resultMap="UserEntityMap">
+        select *
+        from t_user
+        where uid = #{uid}
+    </select>
+
+    <!--if 表示判断标签 test 接收的是一个返回值为boolean 类型的条件
+    如果test 条件的结果为true 则执行if 标签内部的语句-->
+    <update id="updateInfoByUid">
+        update t_user
+        set
+        <if test="phone!= null">phone=#{phone},</if>
+        <if test="email!=null">email =#{email},</if>
+        <if test="gender !=null">gender = #{gender},</if>
+        modified_user = #{modifiedUser},
+        modified_time = #{modifiedTime}
+        where uid = #{uid}
+    </update>
+
+    <update id="updateAvatarByUid">
+        update t_user
+        set avatar=#{avatar},
+            modified_user =#{modifiedUser},
+            modified_time =#{modifiedTime}
+        where uid = #{uid}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
